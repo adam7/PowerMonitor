@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerMonitor", "PowerMonitor\PowerMonitor.csproj", "{B144D522-F82D-4D54-9F4C-B6B11737E4D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerMonitor.Web", "PowerMonitor.Web\PowerMonitor.Web.csproj", "{B144D522-F82D-4D54-9F4C-B6B11737E4D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerMonitorTests", "PowerMonitorTests\PowerMonitorTests.csproj", "{B19ABEA9-8080-4B01-97F3-042A195D905F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerMonitor.Tests", "PowerMonitor.Tests\PowerMonitor.Tests.csproj", "{B19ABEA9-8080-4B01-97F3-042A195D905F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

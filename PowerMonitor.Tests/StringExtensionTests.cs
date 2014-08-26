@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PowerMonitor.Extensions;
+using PowerMonitor.Web.Extensions;
 
-namespace PowerMonitorTests
+namespace PowerMonitor.Tests
 {
     [TestClass]
     public class StringExtensionTests
