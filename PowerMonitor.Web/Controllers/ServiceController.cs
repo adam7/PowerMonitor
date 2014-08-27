@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Xml.Linq;
 using PowerMonitor.Web.Extensions;
 using System.Drawing;
+using WebApi.OutputCache.V2;
 
 namespace PowerMonitor.Web.Controllers
 {
@@ -30,6 +31,9 @@ namespace PowerMonitor.Web.Controllers
 
     public class ServiceController : ApiController
     {
+        const int serverTimeSpan = 120;
+        const int clientTimeSpan = 120;
+
         List<FuelType> fuelTypes = new List<FuelType>{
             new FuelType("Combined Cycle Gas Turbine",  "CCGT", Color.OliveDrab), 
             new FuelType("Open Cycle Gas Turbine", "OCGT", Color.PaleVioletRed), 
@@ -90,6 +94,7 @@ namespace PowerMonitor.Web.Controllers
 
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan=clientTimeSpan, ServerTimeSpan=serverTimeSpan)]
         public dynamic GenerationByFuelType()
         {
             var xml = XDocument.Load(@"http://www.bmreports.com/bsp/additional/soapfunctions.php?element=generationbyfueltypetable");
@@ -100,6 +105,7 @@ namespace PowerMonitor.Web.Controllers
         }
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan = clientTimeSpan, ServerTimeSpan = serverTimeSpan)]
         public dynamic GenerationByFuelTypeHistoric()
         {
             var xml = XDocument.Load(@"http://www.bmreports.com/bsp/additional/soapfunctions.php?element=generationbyfueltypetablehistoric");
@@ -114,6 +120,7 @@ namespace PowerMonitor.Web.Controllers
         }
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan = clientTimeSpan, ServerTimeSpan = serverTimeSpan)]
         public dynamic RollingSystemFrequency()
         {
             var xml = XDocument.Load(@"http://www.bmreports.com/bsp/additional/soapfunctions.php?element=rollingfrequency&output");
@@ -140,6 +147,7 @@ namespace PowerMonitor.Web.Controllers
         }
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan = clientTimeSpan, ServerTimeSpan = serverTimeSpan)]
         public dynamic OutputByYear(int year)
         {
             var xml = XDocument.Load(@"http://www.bmreports.com/bsp/additional/soapfunctions.php?output=XML&duration=year1&element=NOUD&submit=Invoke");
@@ -166,6 +174,7 @@ namespace PowerMonitor.Web.Controllers
         }
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan = clientTimeSpan, ServerTimeSpan = serverTimeSpan)]
         public dynamic ForecastDemand()
         {
             var xml = XDocument.Load(@"http://www.bmreports.com/bsp/additional/soapfunctions.php?element=214demand&submit=Invoke");
