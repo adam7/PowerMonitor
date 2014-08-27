@@ -25,7 +25,7 @@
         activate();
 
         function activate() {
-            logSuccess('Hot Towel Angular loaded!', null, true);
+            logSuccess('Power Monitor loaded!', null, true);
             common.activateController([], controllerId);
         }
 
