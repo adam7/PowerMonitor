@@ -1,12 +1,9 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'dashboard';
-    angular.module('app').controller(controllerId, ['common', 'datacontext', '$http', dashboard]);
+    angular.module('app').controller(controllerId, ['$http', dashboard]);
 
-    function dashboard(common, datacontext, $http) {
-        var getLogFn = common.logger.getLogFn;
-        var log = getLogFn(controllerId);
-
+    function dashboard($http) {
         var vm = this;
         vm.title = 'Dashboard';
         vm.RollingSystemFrequency = { title : "Rolling System Frequency" };
@@ -16,15 +13,15 @@
         activate();
 
         function activate() {
+            Chart.defaults.global.responsive = true;
+            Chart.defaults.global.animation = false;
+
             var promises = [
                 getRollingSystemFrequency(),
                 getGenerationByFuelType(),
                 getGenerationByFuelTypeHistoric(),
                 getForecastDemand()
             ];
-
-            common.activateController(promises, controllerId)
-                .then(function () { log('Activated Dashboard View'); });
         }
 
         function getGenerationByFuelType() {
@@ -33,7 +30,6 @@
             promise.success(function (data) {
                 vm.GenerationByFuelType.data = data;
                 vm.GenerationByFuelType.options = {};
-                console.log(vm.GenerationByFuelType.data);
             }).error(function (error) {
                 console.error('Error:' + error);
             });
@@ -41,7 +37,6 @@
         
         function getGenerationByFuelTypeHistoric() {
             var options = {
-                animation: false,
                 datasetFill: false,
                 multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>"
             };
@@ -58,8 +53,7 @@
 
         function getRollingSystemFrequency() {
             var options =  {
-                pointHitDetectionRadius: 1,
-                animation: false
+                pointHitDetectionRadius: 1
             };
 
             var promise = $http.get('Service/RollingSystemFrequency');

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PowerMonitor")]
+[assembly: AssemblyTitle("PowerMon")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PowerMonitor")]
+[assembly: AssemblyProduct("PowerMon")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("998af5e8-f233-479b-b8be-f73b29b0d0fa")]
+[assembly: Guid("d570be5d-a0c1-4b6b-ba53-b199e4af11fc")]
 
 // Version information for an assembly consists of the following four values:
 //
