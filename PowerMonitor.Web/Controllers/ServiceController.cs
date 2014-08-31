@@ -13,6 +13,8 @@ namespace PowerMonitor.Web.Controllers
 {
     public class ServiceController : ApiController
     {
+        public IXDocumentLoader XDocumentLoader { get; set; }
+
         const int serverTimeSpan = 120;
         const int clientTimeSpan = 120;
 
@@ -85,7 +87,7 @@ namespace PowerMonitor.Web.Controllers
         [CacheOutput(ClientTimeSpan = clientTimeSpan, ServerTimeSpan = serverTimeSpan)]
         public PieChart GenerationByFuelType()
         {
-            var xml = XDocument.Load(@"http://www.bmreports.com/bsp/additional/soapfunctions.php?element=generationbyfueltypetable");
+            var xml = XDocumentLoader.LoadGenerationByFuelType();
 
             var query = xml.Root.Elements("LAST24H");
 
@@ -96,7 +98,7 @@ namespace PowerMonitor.Web.Controllers
         [CacheOutput(ClientTimeSpan = clientTimeSpan, ServerTimeSpan = serverTimeSpan)]
         public dynamic GenerationByFuelTypeHistoric()
         {
-            var xml = XDocument.Load(@"http://www.bmreports.com/bsp/additional/soapfunctions.php?element=generationbyfueltypetablehistoric");
+            var xml = XDocumentLoader.LoadGenerationByFuelTypeHistoric();
 
             var query = xml.Root.Elements("INST").Where(e => e.Attribute("AT").Value.Tail(5) == "00:00");
 
@@ -111,7 +113,7 @@ namespace PowerMonitor.Web.Controllers
         [CacheOutput(ClientTimeSpan = clientTimeSpan, ServerTimeSpan = serverTimeSpan)]
         public LineChart RollingSystemFrequency()
         {
-            var xml = XDocument.Load(@"http://www.bmreports.com/bsp/additional/soapfunctions.php?element=rollingfrequency&output");
+            var xml = XDocumentLoader.LoadRollingSystemFrequency();
 
             var query = xml.Root.Elements("ST").Where(e => e.Attribute("ST").Value.Tail(3) == ":00");
 
@@ -137,7 +139,7 @@ namespace PowerMonitor.Web.Controllers
         [CacheOutput(ClientTimeSpan = clientTimeSpan, ServerTimeSpan = serverTimeSpan)]
         public dynamic OutputByYear(int year)
         {
-            var xml = XDocument.Load(@"http://www.bmreports.com/bsp/additional/soapfunctions.php?output=XML&duration=year1&element=NOUD&submit=Invoke");
+            var xml = XDocumentLoader.LoadOutputByYear(year); 
 
             var query = xml.Root.Elements("SD")
                 .Where(e => e.Attribute("WN") != null);
@@ -147,7 +149,7 @@ namespace PowerMonitor.Web.Controllers
                 labels = query.Select(e => e.Attribute("WN").Value),
                 datasets = new[] {
                     new {
-                        label = "My First dataset",
+                        label = "Output By Year",
                         fillColor = "rgba(220,220,220,0.2)",
                         strokeColor = "rgba(220,220,220,1)",
                         pointColor = "rgba(220,220,220,1)",
@@ -164,7 +166,7 @@ namespace PowerMonitor.Web.Controllers
         [CacheOutput(ClientTimeSpan = clientTimeSpan, ServerTimeSpan = serverTimeSpan)]
         public BarChart ForecastDemand()
         {
-            var xml = XDocument.Load(@"http://www.bmreports.com/bsp/additional/soapfunctions.php?element=214demand&submit=Invoke");
+            var xml = XDocumentLoader.LoadForecastDemand();
 
             var query = xml.Root.Elements("DAY_AHEAD_TSDFD_DATA");
 
@@ -173,7 +175,7 @@ namespace PowerMonitor.Web.Controllers
                 labels = query.Select(e => e.Element("SD").Value),
                 datasets = new List<BarChartDataset> {
                     new BarChartDataset {
-                        label = "My First dataset",
+                        label = "Forecast Demand",
                         fillColor = "rgba(220,220,220,0.2)",
                         strokeColor = "rgba(220,220,220,1)",
                         highlightFill = "#fff",
