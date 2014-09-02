@@ -53,8 +53,7 @@ namespace PowerMonitor.Tests
                 throw new NotImplementedException();
             }
         }
-
-
+        
         [TestMethod]
         public void WhenCallingForecastDemand_LabelsShouldBePopulated()
         {
@@ -99,5 +98,7 @@ namespace PowerMonitor.Tests
 
             Assert.AreEqual(1, forecastDemand.datasets.Count());
         }
+    
+    
     }
 }

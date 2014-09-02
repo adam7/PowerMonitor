@@ -10,6 +10,11 @@
         vm.GenerationByFuelType = { title : "Generation By Fuel Type" };
         vm.GenerationByFuelTypeHistoric = { title: "Generation By Fuel Type Historic" };
         vm.ForecastDemand = { title: "Forecast Demand" };
+        vm.getOutputByYear = getOutputByYear;
+        vm.OutputByYear = {
+            title: "National Output Year Ahead",
+            year: 1            
+        };
         activate();
 
         function activate() {
@@ -20,7 +25,8 @@
                 getRollingSystemFrequency(),
                 getGenerationByFuelType(),
                 getGenerationByFuelTypeHistoric(),
-                getForecastDemand()
+                getForecastDemand(),
+                getOutputByYear()
             ];
         }
 
@@ -31,7 +37,7 @@
                 vm.GenerationByFuelType.data = data;
                 vm.GenerationByFuelType.options = {};
             }).error(function (error) {
-                console.error('Error:' + error);
+                console.error(error);
             });
         }
         
@@ -47,7 +53,7 @@
                 vm.GenerationByFuelTypeHistoric.data = data;
                 vm.GenerationByFuelTypeHistoric.options = options;
             }).error(function (error) {
-                console.error('Error:' + error);
+                console.error(error);
             });
         }
 
@@ -62,7 +68,7 @@
                 vm.RollingSystemFrequency.data = data;
                 vm.RollingSystemFrequency.options = options;
             }).error(function (error) {
-                console.error('Error:' + error);
+                console.error(error);
             });
         }
 
@@ -73,7 +79,18 @@
                 vm.ForecastDemand.data = data;
                 vm.ForecastDemand.options = {};
             }).error(function (error) {
-                console.error('Error:' + error);
+                console.error(error);
+            });
+        }
+
+        function getOutputByYear() {
+            var promise = $http.get("Service/OutputByYear/?year=" + vm.OutputByYear.year);
+
+            promise.success(function (data) {
+                vm.OutputByYear.data = data;
+                vm.OutputByYear.options = {};
+            }).error(function(error){
+                console.error(error);
             });
         }
     }

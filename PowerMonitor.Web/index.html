@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html data-ng-app="app">
 <head>
     <meta charset="utf-8">
@@ -66,6 +66,28 @@
                         <div class="panel-body">
                             <div>
                                 <canvas data-linechart data-options="vm.RollingSystemFrequency.options" data="vm.RollingSystemFrequency.data"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{vm.OutputByYear.title}}
+                                <select ng-model="vm.OutputByYear.year" ng-change="vm.getOutputByYear()">
+                                    <!-- TODO: Yeah this should clearly be dynamic! -->
+                                    <option value="1">2015</option>
+                                    <option value="2">2016</option>
+                                    <option value="3">2017</option>
+                                    <option value="4">2018</option>
+                                    <option value="5">2019</option>
+                                </select></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                <canvas data-linechart data-options="vm.OutputByYear.options" data="vm.OutputByYear.data"></canvas>
                             </div>
                         </div>
                     </div>
